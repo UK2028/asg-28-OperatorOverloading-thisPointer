@@ -1,0 +1,609 @@
+NAME-UDIT KHANDELWAL							ASSIGNMENT-28 (Operator Overloading, friend operator and this pointers)
+
+
+
+1. Define a class Complex with appropriate instance variables and member functions.
+Overload following operators
+a. << insertion operator
+b. >> extraction operator
+
+#include<iostream>
+using namespace std;
+
+class Complex
+{
+    int real,imag;
+
+public:
+
+    Complex()
+    {
+        real=0;
+        imag=0;
+    }
+
+    Complex(int r,int i)
+    {
+        real=r;
+        imag=i;
+    }
+
+    Complex(const Complex &c)
+    {
+        real=c.real;
+        imag=c.imag;
+    }
+
+    Complex& operator=(const Complex &c)
+    {
+        real = c.real;
+        imag = c.imag;
+        return *this;
+    }
+
+    friend istream& operator>>(istream&,Complex&);
+
+    friend ostream& operator<<(ostream&,Complex&);
+
+    void setData(int r,int i)
+    {
+        real=r;
+        imag=i;
+    }
+
+    void display()
+    {
+        cout<<"Real part: "<<real<<endl;
+        cout<<"Imaginary part: "<<imag<<endl;
+    }
+};
+
+istream& operator>>(istream &in,Complex &c)
+{
+    cout<<"enter real part: ";
+    in>>c.real;
+    cout<<"enter imaginary part: ";
+    in>>c.imag;
+    return in;
+}
+
+ostream& operator<<(ostream &out,Complex &c)
+{
+    out<<"Real part: "<<c.real<<endl;
+    out<<"Imaginary part: "<<c.imag<<endl;
+    return out;
+}
+
+int main()
+{
+    Complex c1;
+    c1.setData(3,4);
+    c1.display();
+
+    Complex c2(10,12);
+    c2.display();
+
+    Complex c3 = c1;
+    cout<<c3;
+
+    Complex c4;
+    cin>>c4;
+    cout<<c4;
+
+    Complex c5,c6;
+    c6=c5=c1;
+    cout<<c5<<c6;
+    return 0;
+}
+
+
+2. Define a class Complex with appropriate instance variables and member functions.
+One of the functions should be setData() to set the properties of the object. Make
+sure the names of formal arguments are the same as names of instance variables.
+
+#include<iostream>
+using namespace std;
+
+class Complex
+{
+    int real,imag;
+
+public:
+
+    Complex()
+    {
+        real=0;
+        imag=0;
+    }
+
+    Complex(int r,int i)
+    {
+        real=r;
+        imag=i;
+    }
+
+    Complex(const Complex &c)
+    {
+        real=c.real;
+        imag=c.imag;
+    }
+
+    Complex& operator=(const Complex &c)
+    {
+        real = c.real;
+        imag = c.imag;
+        return *this;
+    }
+
+    friend istream& operator>>(istream&,Complex&);
+
+    friend ostream& operator<<(ostream&,Complex&);
+
+    void setData(int real,int imag)
+    {
+        (*this).real=real;
+        (*this).imag=imag;
+    }
+
+    void display()
+    {
+        cout<<"Real part: "<<real<<endl;
+        cout<<"Imaginary part: "<<imag<<endl;
+    }
+};
+
+istream& operator>>(istream &in,Complex &c)
+{
+    cout<<"enter real part: ";
+    in>>c.real;
+    cout<<"enter imaginary part: ";
+    in>>c.imag;
+    return in;
+}
+
+ostream& operator<<(ostream &out,Complex &c)
+{
+    out<<"Real part: "<<c.real<<endl;
+    out<<"Imaginary part: "<<c.imag<<endl;
+    return out;
+}
+
+int main()
+{
+    Complex c1;
+    c1.setData(3,4);
+    c1.display();
+
+    Complex c2(10,12);
+    c2.display();
+
+    Complex c3 = c1;
+    cout<<c3;
+
+    Complex c4;
+    cin>>c4;
+    cout<<c4;
+
+    Complex c5,c6;
+    c6=c5=c1;
+    cout<<c5<<c6;
+    return 0;
+}
+
+
+3. Overload subscript operator [] that will be useful when we want to check for an index
+out of bound.
+
+#include<iostream>
+using namespace std;
+
+class Array
+{
+    int size=100;
+    int a[100];
+
+public:
+
+    void setData(int index,int value)
+    {
+        if(index>=size)
+        {
+            cout<<"Index out of bound"<<endl;
+            exit(0);
+        }
+        a[index]=value;
+    }
+
+    void display(int index)
+    {
+        cout<<"value at index "<<index<<" is : "<<a[index]<<endl;
+    }
+
+    int operator[](int index)
+    {
+        if(index>=size)
+        {
+            cout<<"Index out of bound"<<endl;
+            exit(0);
+        }
+        return a[index];
+    }
+};
+
+int main()
+{
+    Array a1;
+    a1.setData(20,10);
+    a1.display(20);
+    cout<<a1[20];
+    return 0;
+}
+
+
+
+6. Create a complex class and overload assignment operator for that class.
+
+#include<iostream>
+using namespace std;
+
+class Complex
+{
+    int real,imag;
+
+public:
+
+    Complex()
+    {
+        real=0;
+        imag=0;
+    }
+
+    Complex(int r,int i)
+    {
+        real=r;
+        imag=i;
+    }
+
+    Complex(const Complex &c)
+    {
+        real=c.real;
+        imag=c.imag;
+    }
+
+    Complex& operator=(const Complex &c)
+    {
+        real = c.real;
+        imag = c.imag;
+        return *this;
+    }
+
+    friend istream& operator>>(istream&,Complex&);
+
+    friend ostream& operator<<(ostream&,Complex&);
+
+    void setData(int real,int imag)
+    {
+        (*this).real=real;
+        (*this).imag=imag;
+    }
+
+    void display()
+    {
+        cout<<"Real part: "<<real<<endl;
+        cout<<"Imaginary part: "<<imag<<endl;
+    }
+};
+
+istream& operator>>(istream &in,Complex &c)
+{
+    cout<<"enter real part: ";
+    in>>c.real;
+    cout<<"enter imaginary part: ";
+    in>>c.imag;
+    return in;
+}
+
+ostream& operator<<(ostream &out,Complex &c)
+{
+    out<<"Real part: "<<c.real<<endl;
+    out<<"Imaginary part: "<<c.imag<<endl;
+    return out;
+}
+
+int main()
+{
+    Complex c1;
+    c1.setData(3,4);
+    c1.display();
+
+    Complex c2(10,12);
+    c2.display();
+
+    Complex c3 = c1;
+    cout<<c3;
+
+    Complex c4;
+    cin>>c4;
+    cout<<c4;
+
+    Complex c5,c6;
+    c6=c5=c1;
+    cout<<c5<<c6;
+    return 0;
+}
+
+
+7. Create an Integer class and overload logical not operator for that class.
+
+#include<iostream>
+using namespace std;
+
+class Integer
+{
+    int n;
+
+public:
+
+    void setData(int value)
+    {
+        n=value;
+    }
+
+    void display()
+    {
+        cout<<"value is : "<<n<<endl;
+    }
+
+    int operator!()
+    {
+        return !n;
+    }
+};
+
+int main()
+{
+    Integer i;
+    i.setData(20);
+    i.display();
+    cout<<"Using Operator logical NOT overloading: "<<!i<<endl;
+    return 0;
+}
+
+
+8. Create a Coordinate class for 3 variables x,y and z and overload comma operator
+such that when you write c3 = (c1 , c2 ) then c2 is assigned to c3. Where c1,c2,and
+c3 are objects of 3D coordinate class.
+
+#include<iostream>
+using namespace std;
+
+class Coord
+{
+    int x,y,z;
+
+public:
+
+    Coord()
+    {
+        x=0;
+        y=0;
+        z=0;
+    }
+
+    Coord(int a,int b,int c)
+    {
+        x=a;
+        y=b;
+        z=c;
+    }
+
+
+
+    void setData(int a,int b,int c)
+    {
+        x=a;
+        y=b;
+        z=c;
+    }
+
+    void display()
+    {
+        cout<<"value of x : "<<x<<endl;
+        cout<<"value of y : "<<y<<endl;
+        cout<<"value of z : "<<z<<endl;
+    }
+
+    Coord operator,(Coord &c)
+    {
+        Coord temp;
+        temp.x=c.x;
+        temp.y=c.y;
+        temp.z=c.z;
+        return temp;
+    }
+};
+
+int main()
+{
+    Coord c1;
+    c1.setData(20,30,40);
+    c1.display();
+
+    Coord c2(10,20,30);
+
+    Coord c3;
+    c3=(c1,c2);
+    c3.display();
+
+    Coord c4;
+    c4=(c3,c2,c1);
+    c4.display();
+
+    return 0;
+}
+
+9. Create an Integer class that contains int x as an instance variable and overload
+casting int() operator that will type cast your Integer class object to int data type.
+
+#include<iostream>
+using namespace std;
+
+class Integer
+{
+    int x;
+
+public:
+
+    Integer()
+    {
+        x=0;
+    }
+
+    Integer(int m)
+    {
+        x=m;
+    }
+
+    void display()
+    {
+        cout<<"Integer is : "<<(*this).x<<endl;
+    }
+
+    operator int()
+    {
+        return x;
+    }
+
+};
+
+int main()
+{
+    Integer i=5;
+    i.display();
+
+    int n;
+    n=i;
+    cout<<"value of int is: "<<n<<endl;
+
+    return 0;
+}
+
+
+10. Create a Distance class having 2 instance variable feet and inches. Also create
+default constructor and parameterized constructor takes 2 variables . Now overload ()
+function call operator that takes 3 arguments a , b and c and set feet = a + c + 5 and
+inches = a+b + 15.
+
+#include<iostream>
+using namespace std;
+
+class Distance
+{
+    int feet,inches;
+
+public:
+
+    Distance()
+    {
+        feet=0;
+        inches=0;
+    }
+
+    Distance(int a,int b)
+    {
+        (*this).feet=a;
+        (*this).inches=b;
+    }
+
+
+
+    void setData(int a,int b)
+    {
+        (*this).feet=a;
+        (*this).inches=b;
+    }
+
+    void display()
+    {
+        cout<<"value of feet : "<<(*this).feet<<endl;
+        cout<<"value of inches : "<<(*this).inches<<endl;
+    }
+
+    Distance operator()(int a,int b,int c)
+    {
+        Distance temp;
+        temp.feet=a+c+5;
+        temp.inches=a+b+15;
+        return temp;
+    }
+};
+
+int main()
+{
+    Distance d1(10,20);
+    d1.display();
+
+    Distance d2;
+    d2=d1(10,20,30);
+    d2.display();
+
+    return 0;
+}
+
+
+11. Create a class Marks that have one member variable marks and one member
+function that will print marks. We know that we can access member functions using
+(.) dot operator. Now you need to overload (->) arrow operator to access that
+function.
+
+#include<iostream>
+using namespace std;
+
+class Marks
+{
+    int mark;
+
+public:
+
+    Marks()
+    {
+        mark=0;
+    }
+
+    Marks(int m)
+    {
+        mark=m;
+    }
+
+    void setData(int a)
+    {
+        (*this).mark=a;
+    }
+
+    void display()
+    {
+        cout<<"mark is : "<<(*this).mark<<endl;
+    }
+
+    Marks * operator->()
+    {
+        return this;
+    }
+
+
+};
+
+int main()
+{
+    Marks m1(100);
+    m1.display();
+    m1->display();
+
+    Marks m2;
+    m2.setData(90);
+    m2->display();
+
+
+    return 0;
+}
+
